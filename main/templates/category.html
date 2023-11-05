@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid text-center">
+  <h1 class="">{{ category.subject.name }}</h1>
+  <ul>
+    {% for post in posts %}
+      {% if category.subject.name == post.subject.name %}
+      <li>
+        <a href="{% url 'details' post.pk %}">
+          <h4>Title - {{ post.title }}</h4>
+        </a>
+        <p>Date: {{ post.date }}</p>
+        <p>Author: {{ post.author }} <img src="{{post.author.profile.profile_picture.url}}" width="70" height="70" class="rounded-circle" alt="The boys jeremy enzo owen peter francis jarex fabian and maybe idol..."> </p>
+        {% if user.id == post.author.id %}
+          <a href="{% url 'edit' post.pk %}">Edit</a> -
+          <a href="{% url 'delete' post.pk %}">Delete</a>
+        {% endif %}
+        {% if post.file %}
+          <a href="{{ post.file.url }}" target="_blank">Download File</a>
+        {% endif %}
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

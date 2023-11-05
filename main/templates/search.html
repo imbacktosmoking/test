@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content%}
+
+<!DOCTYPE html>
+<html>
+    <body>
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+     
+
+<title> MMIS notes </title>
+
+
+<div class=" text-center">
+
+    <h1> Searched For "{{searched}}" </h1>
+    {% if posts %}
+        {% for post in posts %}
+            <a href="{% url 'details' post.id %}">{{ post.title }}</a><br/>
+        {% endfor %}
+    {% else %}
+        <p>No matching posts found.</p>
+    {% endif %}
+</div>
+
+
+
+
+    </body>
+</html>
+{% endblock %}
