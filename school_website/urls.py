@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import views 
 from django.urls import path, include
-from main.views import RegistrationView, ProfilePage,Homepage, Details, create_post, CategoryDetailView, search_website, Update, Delete, UserEdit, About_Us, PasswordChangeView, CustomLoginView
+from main.views import RegistrationView, ProfilePage,Homepage, Details, create_post, CategoryDetailView, search_website, Update, Delete, UserEdit, About_Us, PasswordChangeView, CustomLoginView 
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.decorators import login_required
@@ -27,5 +27,6 @@ urlpatterns = [
     path('delete/<int:pk>', Delete.as_view(), name="delete"),
     path('edit_profile/', UserEdit.as_view(), name='edit_profile'),
     path('password/', PasswordChangeView.as_view(template_name='registration/change_password.html'), name='password_change'),
-    path('<int:pk>/profile_page/', ProfilePage.as_view(), name="profile_page")
+    path('<int:pk>/profile_page/', ProfilePage.as_view(), name="profile_page"),
+    path('postman/', include('postman.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

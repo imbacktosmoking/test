@@ -1,27 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container-fluid text-center">
-  <h1 class="">{{ category.subject.name }}</h1>
-  <ul>
-    {% for post in posts %}
-      {% if category.subject.name == post.subject.name %}
-      <li>
-        <a href="{% url 'details' post.pk %}">
-          <h4>Title - {{ post.title }}</h4>
-        </a>
-        <p>Date: {{ post.date }}</p>
-        <p>Author: {{ post.author }} <img src="{{post.author.profile.profile_picture.url}}" width="70" height="70" class="rounded-circle" alt="The boys jeremy enzo owen peter francis jarex fabian and maybe idol..."> </p>
-        {% if user.id == post.author.id %}
-          <a href="{% url 'edit' post.pk %}">Edit</a> -
-          <a href="{% url 'delete' post.pk %}">Delete</a>
+<div class="d-flex flex-column min-vh-100">
+  <div class="container flex-grow-1 d-flex flex-column align-items-center mt-5">
+    <h1 class="display-4">{{ category.subject.name }}</h1>
+
+    <ul class="list-unstyled mt-4">
+      {% for post in posts %}
+        {% if category.subject.name == post.subject.name %}
+          <li class="d-flex border-bottom my-3">
+            <div class="flex-grow-1 p-3">
+              <a href="{% url 'details' post.pk %}" class="h4 text-dark">{{ post.title }}</a>
+              <p class="text-muted">Date: {{ post.date }}</p>
+
+              <div class="d-flex align-items-center">
+                <a href="{% url 'profile_page' post.author.profile.id %}" class="text-muted">
+                  <img src="{{ post.author.profile.profile_picture.url }}" width="50" height="50" class="rounded-circle me-2" alt="">
+                  {{ post.author }}
+                </a>
+
+                {% if user.id == post.author.id %}
+                  <a href="{% url 'edit' post.pk %}" class="ms-2 text-muted">Edit</a>
+                  <a href="{% url 'delete' post.pk %}" class="ms-2 text-muted">Delete</a>
+                {% endif %}
+              </div>
+
+              {% if post.file %}
+                <a href="{{ post.file.url }}" target="_blank" class="text-muted mt-2">Download File</a>
+              {% endif %}
+            </div>
+          </li>
         {% endif %}
-        {% if post.file %}
-          <a href="{{ post.file.url }}" target="_blank">Download File</a>
-        {% endif %}
-      </li>
-      {% endif %}
-    {% endfor %}
-  </ul>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 {% endblock %}

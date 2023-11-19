@@ -23,21 +23,21 @@
       <div class="carousel-item active c-item">
         <img src="{% static 'banner1.jpg' %}" class="d-block c-image" alt="Slide 1">
         <div class="carousel-caption d-none d-md-block">
-          <p> A place to learn<p> 
+          <p>Education Is Key <p> 
           <h1> MMIS Notes</h1>
         </div>
       </div>
       <div class="carousel-item c-item2">
         <img src="{% static 'banner2.jpg' %}" class="d-block c-image2 w-100 " alt="Slide 2">
         <div class="carousel-caption d-none d-md-block">
-          <p>A place to learn <p>
+          <p>Education Is Key <p>
             <h1> MMIS Notes </h1>
         </div>
       </div>
       <div class="carousel-item c-item">
         <img src="{% static 'banner1.jpg'%}" class="d-block c-image3 w-100 " alt="Slide 3">
         <div class="carousel-caption d-none d-md-block">
-          <p>A place to learn<p>
+          <p> Education Is Key <p>
             <h1> MMIS Notes</h1>
         </div>
       </div>
@@ -57,18 +57,17 @@
 </div>
 
 
-
 <div class="d-flex">
-  <ul class="list-group overflow-auto" style="max-height: 350px;"> 
+  <ul class="list-group overflow-auto" style="max-height: 350px;">
     {% for post in posts %}
       {% if post.subject.name == "announcement" %}
-        <li class="list-group-item">
-           <p><strong> </p> <img src="{{post.author.profile.profile_picture.url}}" width="50" height="50" class="rounded-circle" alt="The boys jeremy enzo owen peter francis jarex fabian and maybe idol..."> </strong> {{ post.author }}</p>
+        <li class="list-group-item border p-3">
+          <p><strong></strong> <img src="{{post.author.profile.profile_picture.url}}" width="50" height="50" class="rounded-circle" alt="The boys jeremy enzo owen peter francis jarex fabian and maybe idol..."> </strong> {{ post.author }}</p>
           <a href="{% url 'details' post.pk %}">
-            <h4 class="mb-3">Title - {{ post.title }}</h4>
+            <h4 class="mb-3 text-primary  text-dark">Title - {{ post.title }}</h4>
           </a>
           <p><strong>Date:</strong> {{ post.date }}</p>
-          <p>{{ post.body|slice:":200" }}</p>
+          <p>{{ post.body|slice:":200"|truncatewords:30|safe}} <a href="{% url 'details' post.pk %}" style="color:#0e7bef;">Read More...</a></p>
         </li>
       {% endif %}
     {% endfor %}
@@ -76,8 +75,10 @@
 </div>
 
 
+
+
+
 <div class="container-fluid custom-announcement">
-    <h2>Idk what to put here  </h2>
 </div>
 
 

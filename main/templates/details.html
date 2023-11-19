@@ -3,25 +3,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        body {
-            background-color: rgb(255, 255, 255);
-        }
-    </style>
+  <style>
+    body {
+      background-color: rgb(255, 255, 255);
+    }
+
+    h1, h3 {
+      font-family: sans-serif;
+    }
+
+    .mt-4 {
+      margin: 20px 0;
+    }
+  </style>
 </head>
 <body>
 <div class="container mt-5">
-    <h1 class="text-center">{{ post.title }}</h1>
-    <div class="d-flex justify-content-center align-items-center mt-3">
-        <img src="{{ post.author.profile.profile_picture.url }}" width="70" height="70" class="rounded-circle me-3">
-        <div>
-            <h3>{{ post.author.username }}</h3>
-            <a href="{% url 'profile_page' post.author.profile.id %}" class="text-muted">{{ post.author.profile }}</a>
-        </div>
+  <h1 class="text-center">{{ post.title }}</h1>
+  <div class="d-flex justify-content-center align-items-center mt-3">
+    <img src="{{ post.author.profile.profile_picture.url }}" width="70" height="70" class="rounded-circle me-3">
+    <div>
+      <h3>{{ post.author.username }}</h3>
+      <a href="{% url 'profile_page' post.author.profile.id %}" class="text-muted">{{ post.author.profile }}</a>
     </div>
-    <div class="mt-4">
-        {{ post.body|safe }}
-    </div>
+  </div>
+  <div class="mt-4">
+    {{ post.body|safe }}
+  </div>
 </div>
 </body>
 </html>

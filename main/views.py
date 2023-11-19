@@ -1,8 +1,8 @@
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import RegistrationForm, PostForm, EditProfileForm, CustomLoginForm, Edit_Form, PasswordChange
-from .models import Student, Post, Teacher, Category, Profile
+from .forms import RegistrationForm, PostForm, EditProfileForm, CustomLoginForm, Edit_Form, PasswordChange 
+from .models import Student, Post, Teacher, Category, Profile 
 from django.views.generic import ListView,DetailView,CreateView,TemplateView,UpdateView, DeleteView
 from django.db.models import Q
 from django.urls import reverse_lazy

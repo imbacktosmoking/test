@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, PasswordChangeForm
 from django import forms
-from .models import Student, Post, Teacher
+from .models import Student, Post, Teacher 
 from django.contrib.auth.models import User
 
 
@@ -122,3 +122,6 @@ class CustomLoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ('username', 'password')
+    
+
+

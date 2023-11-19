@@ -9,6 +9,8 @@
   </head>
   <body>
 
+  
+
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg" style="background-color:  #fffffff3; ">
         <div class="container-fluid">
@@ -33,38 +35,44 @@
        <!-- end offcanvas link--> 
 
               <li class="nav-item">
-                <a class="nav-link" href="#"> News </a>
+                <a class="nav-link" href="#"> </a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
+                 Messages 
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="/postman/write">Write a message</a></li>
+                  <li><a class="dropdown-item" href="/postman/inbox">Inbox</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                   <li><a class="dropdown-item" href="/postman/trash">Trashed</a></li>
                 </ul>
               </li>
               
               <!-- create note-->
-              {% if user.is_staff%}
+              {% if user.is_staff and not user.is_superuser%}
        <li class="nav-item">
                           <a class="nav-link" href="{% url 'post'%}"> Create note!</a>
                           {% endif %}
+                
+                          {% if user.is_staff and user.is_superuser%}
+
+                           <li class="nav-item">
+       <a class="nav-link" href="{% url 'register'%}">  Create account </a>
+       
+       {% endif %}
+
               <!-- end of create note-->
              
             </ul>
             <form class="d-flex" method="POST" action="{% url 'search' %}">
               {% csrf_token %}
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              <button class="btn btn-outline-primary" type="submit">Search</button>
           </form>
 <!-- If user is not a member -->
               {% else %}
-       <li class="nav-item">
-       <a class="nav-link" href="{% url 'register'%}"> Register</a>
-       </li>
+     
                            <li class="nav-item">
                           <a class="nav-link" href="{% url 'login'%}"> Login </a>
                            </li>
@@ -92,9 +100,9 @@
 {% if user.student.strand == 'STEM' and user.student.grade_level == '12'%}
  {% for category in categories %}
  {% if category.strand == "STEM" and category.level == "12" %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'category' category.pk %}">{{ category.title }}</a>
-                    </li>
+  <a class="nav-link" href="{% url 'category' category.pk %}">
+      {{ category.title }}
+  </a>
                     {% endif %}
                 {% endfor %}
 {% elif user.student.strand == 'ABM' and user.student.grade_level == '12'%}
@@ -108,9 +116,10 @@
 
  {% for category in categories %}
  {% if category.strand == "STEM" and category.level == "11" %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'category' category.pk %}">{{ category.title }}</a>
-                    </li>
+  <a class="nav-link" href="{% url 'category' category.pk %}">
+      {{ category.title }}
+  </a>
+
                     {% endif %}
                 {% endfor %}
 
@@ -133,8 +142,14 @@
 <a href="{% url 'about'%}"> About this website</a>
 </li>
 {% endif %}
-<a href="{% url 'logout' %}">Logout</a>
+    {% if user.is_staff and user.is_superuser%}
+    <li>
 
+       <a href="/admin"> Admin</a>
+       
+       {% endif %}
+       <li>
+<a href="{% url 'logout' %}">Logout</a>
 
     </div>
     </div>

@@ -86,7 +86,6 @@ class Post(models.Model):
         return self.title
 
 
-
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     body = RichTextField(blank=True, null=True)
